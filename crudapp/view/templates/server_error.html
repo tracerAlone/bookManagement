@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+{% block title %} Not found {% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <div class="jumbotron">
+        <form
+                action="javascript:history.back()" method="get" role="form"
+                class="form-horizontal">
+            <button class="btn btn-primary" type="submit" autofocus>
+                go back
+            </button>
+        </form>
+        <h1> Server error</h1>
+        <h3 style="color:red">{{ msg }}</h3>
+
+
+    </div>
+
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+<head>
+    <!-- Common headers -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="{{url_for('static', filename='images/favicon.ico') }}" type="image/x-icon"/>
+    <title> book management system </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/htmleaf-demo.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/signin.css') }}">
+    <!-- javascript -->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+</head>
+<body>
+
+<div class="htmleaf-container">
+    <header class="htmleaf-header">
+        <h1>Book Management System</h1>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="container">
+        <ul class="flashes" style="color:red">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    <div class="container">
+        <div class="signin">
+            <div class="signin-head"><img src="{{url_for('static', filename='images/ccnu.png')}}" alt="ccnu"
+                                          class="img-circle"></div>
+            <form class="form-signin" role="form" action="" method=post>
+                <input type="text" class="form-control" placeholder="username" name=username
+                       value="{{request.form.username }}" autofocus/>
+                <input type="password" class="form-control" placeholder="Password" name=password autofocus/>
+                <button class="btn btn-lg btn-warning btn-block" type=submit value=Login>login in</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

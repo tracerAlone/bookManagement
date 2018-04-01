@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+
+<head>
+
+    {% block head %}
+
+    <title> {% block title %} {% endblock %} </title>
+
+    <!-- Common headers -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <!-- Latest compiled Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+
+    <!-- Validador parsley -->
+    <script src="{{ url_for('static', filename='parsley.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='i18n/es.js') }}"></script>
+    <!-- css de validator -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parsley.css') }}">
+
+</head>
+
+{% endblock head %}
+
+<body>
+
+{% block body %}
+
+{% endblock body %}
+
+</body>
+</html>

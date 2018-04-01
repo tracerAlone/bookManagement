@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)file:///Users/shenweihai/Desktop/index.html?#contact -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{url_for('static', filename='images/favicon.ico') }}" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css') }}">
+    <!-- javascript -->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <title>Home</title>
+    <!--<link href="file:///Users/shenweihai/Desktop/navbar-fixed-top.css" rel="stylesheet">-->
+</head>
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Book Management</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav nav-tabs" id="myTab">
+                <li class="active"><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                {% if status == "admin" %}
+                <li><a href="#addevent">Event</a></li>
+                {% endif %}
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><span class="navbar-brand " href="#">{{session['username']}}, {{session['status']}}</span></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container tab-content">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="tab-pane active" id="home">
+        <div class="jumbotron">
+            <h2>Book Management System</h2>
+            <p>If we use manual books management, there will be many problems, such as a lot of work will increase the
+                error rate and more money will be spent. So, we plan to develop a system that can help our university,
+                CCNU, to manage the books, and make the book management systematic, standardized and procedural.</p>
+            <p>This system is designed to do this.</p>
+        </div>
+    </div>
+    <div class="tab-pane" id="dashboard">
+        <div class="bs-example" data-example-id="striped-table">
+            <h2 class="sub-header">Books
+                <form class="navbar-form navbar-right" action="/search_book" method="POST">
+                    <input type="text" type="submit" name="search" class="form-control" placeholder="Search...">
+                </form>
+            </h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Book Id</th>
+                    <th>Name</th>
+                    <th>Amount Left</th>
+                    <th>Amount Free</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Status</th>
+                    {% if status == "admin" %}
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Publish</th>
+                    {% endif %}
+                    <th>Book</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for event in events %}
+                <tr>
+                    <form id="edit_{{ event.event_id }}" action="/edit_event" method="POST" role="form"
+                          data-parsley-validate>
+                        <td>{{ event.event_id }}</td>
+                        <td><input type="text" name="name" value="{{ event.name }}" {% if status=="guest" %}
+                                   disabled="disabled" {% endif %} required class="btn-default"/></td>
+                        <td>{{ event.ori_cap }}</td>
+                        <td>{{ event.free_cap }}</td>
+                        <td><input type="text" name="price" value="{{ event.price }}" {% if status=="guest" %}
+                                   disabled="disabled" {% endif %} required class="btn-default" style="width:60px;"/>
+                        </td>
+                        <td><input type="text" name="code" value="{{ event.code }}" {% if status=="guest" %}
+                                   disabled="disabled" {% endif %} required class="btn-default" style="width:60px;"/>
+                        </td>
+                        <td>{% if event.status== 1 %} published {% endif %} {% if event.status== 0 %} un-published {%
+                            endif %}
+                        </td>
+                        {% if status == "admin" %}
+                        <td>
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                                Edit
+                            </button>
+                        </td>
+                        {% endif %}
+                    </form>
+                    {% if status == "admin" %}
+                    <td>
+                        <form action="/delete_event" method="POST">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/publish_event" method="POST">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                                Publish
+                            </button>
+                        </form>
+                    </td>
+                    {% endif %}
+                    <td>
+                        <form action="/book_event" method="POST">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                                Book
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bs-example" data-example-id="striped-table">
+            <h2 class="sub-header">Orders
+
+            </h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>book id</th>
+                    <th>discount</th>
+                    <th>cost</th>
+                    <th>cancel</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for info in infos %}
+                <tr>
+                    <td>{{ info.user_name }}</td>
+                    <td>{{ info.event_id }}</td>
+                    <td>{{ info.code }}</td>
+                    <td>{{ info.cost }}</td>
+                    <td>
+                        <form action="/cancel_event" method="POST" class="form-horizontal">
+                            <button type="submit" name="info_id" class="btn-default" value="{{ info.info_id }}">
+                                cancel
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if status == "admin" %}
+    <div class="tab-pane" id="addevent">
+        <div class="jumbotron">
+            <h2>Book</h2>
+            <form id="add_event_form" name="myForm" action="/add_event" method="POST" role="form" data-parsley-validate
+                  class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" name="name" class="form-control" placeholder="Book Name" autofocus/>
+                        <input type="text" name="ori_cap" class="form-control" placeholder="Amout Origin"/>
+                        <input type="text" name="price" class="form-control" placeholder="Price"/>
+                        <input type="text" name="code" class="form-control" placeholder="Discount, [1-100]"/>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <button class="btn btn-primary btn-block" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+</div> <!-- /container -->
+
+</body>
+<script>
+    $(function () {
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+    })
+    $('#myTab a[href="#dashboard"]').tab('show')
+</script>
+</html>
