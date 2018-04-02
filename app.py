@@ -22,4 +22,11 @@ main_controller.def_control(app)
 # This adds curl-like logging
 curl_controller.def_control(app)
 
-app.run(debug=True, host='0.0.0.0', port=80)
+# nginx log: /var/log/nginx
+# nginx stop: nginx -s stop
+# nginx start: nginx
+# service status: systemctl status book_management.service
+# service restart: systemctl restart book_management.service 
+# systemd configuration: /etc/systemd/system/book_management.service
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=5000)

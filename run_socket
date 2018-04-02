@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+CMD="/usr/bin/uwsgi -s 0.0.0.0:56232 --processes 5 --protocol https --master --enable-threads --manage-script-name -w app:app --limit-as 1000"
+
+PYTHONPATH=":/root/bookManagement:$PYTHONPYTH"
+
+cd /root/bookManagement
+exec env PYTHONPATH=$PYTHONPATH $CMD >> /root/bookManagement/uwsgi.log 2>&1
