@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)file:///Users/shenweihai/Desktop/index.html?#contact -->
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,7 +15,6 @@
     <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
     <title>Home</title>
-    <!--<link href="file:///Users/shenweihai/Desktop/navbar-fixed-top.css" rel="stylesheet">-->
 </head>
 <body>
 
@@ -93,21 +91,21 @@
                           data-parsley-validate>
                         <td>{{ event.event_id }}</td>
                         <td><input type="text" name="name" value="{{ event.name }}" {% if status=="guest" %}
-                                   disabled="disabled" {% endif %} required class="btn-default"/></td>
+                                   disabled="disabled" {% endif %} required class="btn-default" style="border-width: 0px;border: none;"/></td>
                         <td>{{ event.ori_cap }}</td>
                         <td>{{ event.free_cap }}</td>
                         <td><input type="text" name="price" value="{{ event.price }}" {% if status=="guest" %}
-                                   disabled="disabled" {% endif %} required class="btn-default" style="width:60px;"/>
+                                   disabled="disabled" {% endif %} required class="btn-default" style="width:60px;border-width: 0px;border: none;"/>
                         </td>
                         <td><input type="text" name="code" value="{{ event.code }}" {% if status=="guest" %}
-                                   disabled="disabled" {% endif %} required class="btn-default" style="width:60px;"/>
+                                   disabled="disabled" {% endif %} required class="btn-default" style="width:60px;border-width: 0px;border: none;""/>
                         </td>
                         <td>{% if event.status== 1 %} published {% endif %} {% if event.status== 0 %} un-published {%
                             endif %}
                         </td>
                         {% if status == "admin" %}
                         <td>
-                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}" style="border-width: 0px;border: none;"/>
                                 Edit
                             </button>
                         </td>
@@ -116,14 +114,14 @@
                     {% if status == "admin" %}
                     <td>
                         <form action="/delete_event" method="POST">
-                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}" style="border-width: 0px;border: none;"/ >
                                 Delete
                             </button>
                         </form>
                     </td>
                     <td>
                         <form action="/publish_event" method="POST">
-                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}" style="border-width: 0px;border: none;"/>
                                 Publish
                             </button>
                         </form>
@@ -131,7 +129,7 @@
                     {% endif %}
                     <td>
                         <form action="/book_event" method="POST">
-                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}">
+                            <button type="submit" name="event_id" class="btn-default" value="{{ event.event_id }}" style="border-width: 0px;border: none;"/>
                                 Book
                             </button>
                         </form>
@@ -184,10 +182,10 @@
                   class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="text" name="name" class="form-control" placeholder="Book Name" autofocus/>
-                        <input type="text" name="ori_cap" class="form-control" placeholder="Amout Origin"/>
-                        <input type="text" name="price" class="form-control" placeholder="Price"/>
-                        <input type="text" name="code" class="form-control" placeholder="Discount, [1-100]"/>
+                        <input type="text" name="name" class="form-control" placeholder="Book Name" autofocus style="margin: 2px;"/>
+                        <input type="text" name="ori_cap" class="form-control" placeholder="Amout Origin" style="margin: 2px;"/>
+                        <input type="text" name="price" class="form-control" placeholder="Price" style="margin: 2px;"/>
+                        <input type="text" name="code" class="form-control" placeholder="Discount, [1-100]" style="margin: 2px;"/>
                     </div>
                 </div>
 
@@ -209,6 +207,6 @@
             $(this).tab('show');
         })
     })
-    $('#myTab a[href="#dashboard"]').tab('show')
+    $('#myTab a[href="#home"]').tab('show')
 </script>
 </html>
