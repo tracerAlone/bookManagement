@@ -160,7 +160,7 @@
                     <td>{{ info.user_name }}</td>
                     
                     {%for event in events%}
-                    {%if event.event_id == info.event.info%}
+                    {%if event.event_id == info.event_id%}
                     <td>{{ event.name }}</td>
                     {%endif%}
                     {%endfor%}
