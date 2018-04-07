@@ -147,8 +147,8 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>name</th>
-                    <th>book id</th>
+                    <th>user name</th>
+                    <th>book name</th>
                     <th>discount</th>
                     <th>cost</th>
                     <th>cancel</th>
@@ -158,7 +158,12 @@
                 {% for info in infos %}
                 <tr>
                     <td>{{ info.user_name }}</td>
-                    <td>{{ info.event_id }}</td>
+                    
+                    {%for event in events%}
+                    {%if event.event_id == info.event.info%}
+                    <td>{{ event.name }}</td>
+                    {%endif%}
+                    {%endfor%}
                     <td>{{ info.code }}</td>
                     <td>{{ info.cost }}</td>
                     <td>
