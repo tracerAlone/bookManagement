@@ -1,7 +1,7 @@
 # booking_management_system
 Using SQLite to store data, SQLAlchemy to access SQLite, Flask as controller and server of the
 views, Flask-Jinja2 to create html views and Bootstrap to format the views.
-database changed manual
+
 ### step by step
 1. install pip: https://pip.pypa.io/en/latest/installing/
 2. install module flask: `sudo pip install flask`
