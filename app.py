@@ -29,4 +29,4 @@ curl_controller.def_control(app)
 # service restart: systemctl restart book_management.service 
 # systemd configuration: /etc/systemd/system/book_management.service
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)

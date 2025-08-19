@@ -3,7 +3,7 @@
 
 import sqlalchemy as sqa
 
-import database
+from . import database
 
 
 #
@@ -14,11 +14,11 @@ class User(database.Base):
                          primary_key=True)
 
     # username
-    username = sqa.Column(sqa.String(50, convert_unicode=True),
+    username = sqa.Column(sqa.String(50),
                           nullable=False, index=True)
 
     # password
-    password = sqa.Column(sqa.String(50, convert_unicode=True),
+    password = sqa.Column(sqa.String(50),
                           nullable=False, index=True)
 
     # privilege, 1: admin 2: guest
@@ -33,7 +33,7 @@ class Event(database.Base):
                           primary_key=True)
 
     # event name
-    name = sqa.Column(sqa.String(50, convert_unicode=True),
+    name = sqa.Column(sqa.String(50),
                       nullable=False, index=True)
 
     # original capacities
@@ -53,11 +53,11 @@ class Event(database.Base):
                        nullable=False, index=True)
 
     # the promotional code
-    code = sqa.Column(sqa.String(256, convert_unicode=True),
+    code = sqa.Column(sqa.String(256),
                       nullable=False, index=True)
 
     #  useless
-    p_date = sqa.Column(sqa.String(256, convert_unicode=True),
+    p_date = sqa.Column(sqa.String(256),
                         nullable=True, index=True)
 
 
@@ -67,7 +67,7 @@ class Info(database.Base):
                          primary_key=True)
 
     # user name
-    user_name = sqa.Column(sqa.String(50, convert_unicode=True),
+    user_name = sqa.Column(sqa.String(50),
                            nullable=False, index=True)
 
     # event_id 
@@ -75,7 +75,7 @@ class Info(database.Base):
                           nullable=False, index=True)
 
     # using code
-    code = sqa.Column(sqa.String(256, convert_unicode=True),
+    code = sqa.Column(sqa.String(256),
                       nullable=False, index=True)
 
     # cost 

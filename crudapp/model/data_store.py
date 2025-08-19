@@ -12,8 +12,8 @@
     The db model is built using SQLAlchemy
 """
 
-import database.database as database
-from database.data_models import Event, Info, User
+from crudapp.model.database import database
+from crudapp.model.database.data_models import Event, Info, User
 import time
 
 database.init_db()

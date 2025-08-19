@@ -10,21 +10,21 @@ LINE_LENGTH = 80
 
 def print_incoming_request(request):
     print('\n\n')
-    print u'< {} {} {}'.format(request.method,
-                               request.url, request.full_path)
+    print('< {} {} {}'.format(request.method,
+                               request.url, request.full_path))
     for k, v in request.headers:
-        print wrap_header(k, v, '<')
+        print(wrap_header(k, v, '<'))
 
     # print(request.headers['content-type'])
     # print('')
 
     if request.mimetype == 'application/json':
-        print '< request data is json:'
-        print wrap_json(request.data, '<')
+        print('< request data is json:')
+        print(wrap_json(request.data, '<'))
 
     elif request.mimetype == 'application/x-www-form-urlencoded':
-        print '< request data is x-www-form-urlencoded:'
-        print request.form
+        print('< request data is x-www-form-urlencoded:')
+        print(request.form)
 
     else:
         pass
@@ -33,13 +33,13 @@ def print_incoming_request(request):
 
 
 def print_outgoing_response(response):
-    print '> %s' % response.status
+    print('> %s' % response.status)
     for k, v in response.headers:
-        print wrap_header(k, v, '>')
+        print(wrap_header(k, v, '>'))
 
     if response.mimetype == 'application/json':
-        print '> response data is json:'
-        print wrap_json(response.data, '>')
+        print('> response data is json:')
+        print(wrap_json(response.data, '>'))
 
 
 def wrap_json(json_string, sign):
